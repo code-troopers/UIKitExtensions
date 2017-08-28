@@ -16,7 +16,12 @@ public extension UIColor {
    - Returns: UIColor
    */
   public static func randomColor() -> UIColor {
-    return UIColor(red: CGFloat(randomFloat(0, upper: 255.0)) / 255.0, green: CGFloat(randomFloat(0, upper: 255.0)) / 255.0, blue: CGFloat(randomFloat(0, upper: 255.0)) / 255.0, alpha: 1)
+    return UIColor(
+      red: CGFloat(randomFloat(0, 255.0)) / 255.0,
+      green: CGFloat(randomFloat(0, 255.0)) / 255.0,
+      blue: CGFloat(randomFloat(0, 255.0)) / 255.0,
+      alpha: 1
+    )
   }
   
   /**
@@ -28,7 +33,7 @@ public extension UIColor {
    
    - Returns: UIColor
    */
-  private static func randomFloat(lower: Float = 0.0, upper: Float = 1.0) -> Float {
+  fileprivate static func randomFloat(_ lower: Float = 0.0, _ upper: Float = 1.0) -> Float {
     let r = Float(arc4random()) / Float(UInt32.max)
     return (r * (upper - lower)) + lower
   }
@@ -40,12 +45,12 @@ public extension UIColor {
    
    - Returns: UIColor
    */
-  public static func colorFromHex(hex: String) -> UIColor {
-    let scanner = NSScanner(string: hex)
-    scanner.charactersToBeSkipped = NSCharacterSet.alphanumericCharacterSet().invertedSet
+  public static func colorFromHex(_ hex: String) -> UIColor {
+    let scanner = Scanner(string: hex)
+    //scanner.charactersToBeSkipped = NSCharacterSet.alphanumericCharacterSet.invertedSet
     
     var value: UInt32 = 0;
-    scanner.scanHexInt(&value)
+    scanner.scanHexInt32(&value)
     
     let red = CGFloat(Float(Int(value >> 16) & 0x000000FF) / 255.0)
     let green = CGFloat(Float(Int(value >> 8) & 0x000000FF) / 255.0)

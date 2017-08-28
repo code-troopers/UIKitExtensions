@@ -21,42 +21,42 @@ extension UIView {
     self.fadeOutNowWithCallback(nil)
   }
   
-  func fadeInNowWithCallback(completion: AnimationCompletionBlock?) {
-    UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+  func fadeInNowWithCallback(_ completion: AnimationCompletionBlock?) {
+    UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
       self.alpha = 1.0
       }, completion: completion)
   }
   
-  func fadeOutNowWithCallback(completion: AnimationCompletionBlock?) {
-    UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+  func fadeOutNowWithCallback(_ completion: AnimationCompletionBlock?) {
+    UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
       self.alpha = 0.0
       }, completion: completion)
   }
   
   func flash() {
-    UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
+    UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseOut, animations: { () -> Void in
       self.alpha = 1
       }) { (param) -> Void in
-        UIView.animateWithDuration(0.1, delay: 0, options: .CurveEaseOut, animations: {
+        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseOut, animations: {
           self.alpha = 0
           }, completion: nil)
     }
   }
   
   // MARK: Resizing animations
-  func resizeWithFactor(factor: CGFloat) {
+  func resizeWithFactor(_ factor: CGFloat) {
     self.resizeWithFactor(factor, completion: nil)
   }
   
-  func resizeWithFactor(factor: CGFloat, completion: AnimationCompletionBlock?) {
+  func resizeWithFactor(_ factor: CGFloat, completion: AnimationCompletionBlock?) {
     let currentFrame = self.frame
     let width = currentFrame.size.width * factor
     let height = currentFrame.size.height * factor
     let leftOffset = (currentFrame.origin.x + (currentFrame.size.width * (1.0 - factor))) / 2
     let topOffset = (currentFrame.origin.y + (currentFrame.size.height * (1.0 - factor))) / 2
-    let newFrame : CGRect = CGRectMake(leftOffset, topOffset, width, height)
+    let newFrame : CGRect = CGRect(x: leftOffset, y: topOffset, width: width, height: height)
     
-    UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
+    UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
       self.frame = newFrame
       }, completion: completion)
   }
@@ -66,11 +66,11 @@ extension UIView {
     self.slideUp(nil)
   }
   
-  func slideUp(completion: ((Bool) -> Void)?) {
-    let screenBound = UIScreen.mainScreen().bounds
+  func slideUp(_ completion: ((Bool) -> Void)?) {
+    let screenBound = UIScreen.main.bounds
     let currentFrame = self.frame
-    let newFrame : CGRect = CGRectMake(currentFrame.origin.x, currentFrame.origin.y - screenBound.size.height, currentFrame.size.width, currentFrame.size.height)
-    UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+    let newFrame : CGRect = CGRect(x: currentFrame.origin.x, y: currentFrame.origin.y - screenBound.size.height, width: currentFrame.size.width, height: currentFrame.size.height)
+    UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
       self.frame = newFrame
       }, completion: completion)
   }
@@ -79,11 +79,11 @@ extension UIView {
     self.slideDown(nil)
   }
   
-  func slideDown(completion: ((Bool) -> Void)?) {
-    let screenBound = UIScreen.mainScreen().bounds
+  func slideDown(_ completion: ((Bool) -> Void)?) {
+    let screenBound = UIScreen.main.bounds
     let currentFrame = self.frame
-    let newFrame : CGRect = CGRectMake(currentFrame.origin.x, currentFrame.origin.y + screenBound.size.height, currentFrame.size.width, currentFrame.size.height)
-    UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+    let newFrame : CGRect = CGRect(x: currentFrame.origin.x, y: currentFrame.origin.y + screenBound.size.height, width: currentFrame.size.width, height: currentFrame.size.height)
+    UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
       self.frame = newFrame
       }, completion: completion)
   }
