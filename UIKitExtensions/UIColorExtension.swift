@@ -15,47 +15,44 @@ public extension UIColor {
    
    - Returns: UIColor
    */
-  public static func randomColor() -> UIColor {
-    return UIColor(
-      red: CGFloat(randomFloat(0, 255.0)) / 255.0,
-      green: CGFloat(randomFloat(0, 255.0)) / 255.0,
-      blue: CGFloat(randomFloat(0, 255.0)) / 255.0,
-      alpha: 1
-    )
+  class func random() -> UIColor {
+    return UIColor(red: randomFloat()/255, green: randomFloat()/255, blue: randomFloat()/255, alpha: 1)
+  }
+  
+  private class func randomFloat() -> CGFloat {
+    return CGFloat(Float(arc4random()) / Float(UINT32_MAX)) * 255
   }
   
   /**
-   Generates a random Float between a lower and an upper values.
-   
-   - Parameters:
-      - lower: the lower value
-      - upper: the lower value
-   
-   - Returns: UIColor
-   */
-  fileprivate static func randomFloat(_ lower: Float = 0.0, _ upper: Float = 1.0) -> Float {
-    let r = Float(arc4random()) / Float(UInt32.max)
-    return (r * (upper - lower)) + lower
-  }
-  
-  /**
-   Formats a hex color string to UIColor. If empty, Black. If invalid, White.
+   Formats a hex color string to UIColor.
    
    - Parameter hex: web format hex color without the #
    
    - Returns: UIColor
    */
-  public static func colorFromHex(_ hex: String) -> UIColor {
-    let scanner = Scanner(string: hex)
-    //scanner.charactersToBeSkipped = NSCharacterSet.alphanumericCharacterSet.invertedSet
+  public convenience init?(hexString: String) {
+    let r, g, b, a: CGFloat
     
-    var value: UInt32 = 0;
-    scanner.scanHexInt32(&value)
+    if hexString.hasPrefix("#") {
+      let start = hexString.index(hexString.startIndex, offsetBy: 1)
+      let hexColor = hexString.substring(from: start)
+      
+      if hexColor.characters.count == 8 {
+        let scanner = Scanner(string: hexColor)
+        var hexNumber: UInt64 = 0
+        
+        if scanner.scanHexInt64(&hexNumber) {
+          r = CGFloat((hexNumber & 0xff000000) >> 24) / 255
+          g = CGFloat((hexNumber & 0x00ff0000) >> 16) / 255
+          b = CGFloat((hexNumber & 0x0000ff00) >> 8) / 255
+          a = CGFloat(hexNumber & 0x000000ff) / 255
+          
+          self.init(red: r, green: g, blue: b, alpha: a)
+          return
+        }
+      }
+    }
     
-    let red = CGFloat(Float(Int(value >> 16) & 0x000000FF) / 255.0)
-    let green = CGFloat(Float(Int(value >> 8) & 0x000000FF) / 255.0)
-    let blue = CGFloat(Float(Int(value) & 0x000000FF) / 255.0)
-    
-    return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+    return nil
   }
 }
