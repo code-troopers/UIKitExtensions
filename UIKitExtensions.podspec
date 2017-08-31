@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'UIKitExtensions'
-  s.version          = '0.2.3'
+  s.version          = '0.2.4'
   s.summary          = 'UIKitExtensions adds usefull features to UIKit classes.'
 
 # This description is used to generate tags and improve search results.
