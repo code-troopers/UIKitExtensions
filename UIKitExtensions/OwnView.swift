@@ -10,11 +10,11 @@ import Foundation
 import SnapKit
 import UIKit
 
-protocol OwnViewProtocol {
+public protocol OwnViewProtocol {
   var viewName: String { get }
 }
 
-class OwnView: UIView {
+public class OwnView: UIView {
   var contentView: UIView!
   
   override init(frame: CGRect) {
@@ -27,7 +27,7 @@ class OwnView: UIView {
     self.loadView()
   }
   
-  func loadView() {
+  public func loadView() {
     if let conformingProtocolView = self as? OwnViewProtocol {
       self.contentView = Bundle.main.loadNibNamed(
         conformingProtocolView.viewName,
