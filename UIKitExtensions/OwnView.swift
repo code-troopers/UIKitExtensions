@@ -14,7 +14,7 @@ public protocol OwnViewProtocol {
   var viewName: String { get }
 }
 
-public class OwnView: UIView {
+open class OwnView: UIView {
   var contentView: UIView!
   
   override init(frame: CGRect) {
@@ -22,12 +22,12 @@ public class OwnView: UIView {
     self.loadView()
   }
   
-  required init(coder: NSCoder) {
+  required public init(coder: NSCoder) {
     super.init(coder: coder)!
     self.loadView()
   }
   
-  public func loadView() {
+  open func loadView() {
     if let conformingProtocolView = self as? OwnViewProtocol {
       self.contentView = Bundle.main.loadNibNamed(
         conformingProtocolView.viewName,
