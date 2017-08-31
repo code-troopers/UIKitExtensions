@@ -29,7 +29,8 @@ open class OwnView: UIView {
   
   open func loadView() {
     if let conformingProtocolView = self as? OwnViewProtocol {
-      self.contentView = Bundle.main.loadNibNamed(
+      let bundle = Bundle(for: self.classForCoder)
+      self.contentView = bundle.loadNibNamed(
         conformingProtocolView.viewName,
         owner: self,
         options: nil
