@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'UIKitExtensions'
-  s.version          = '0.2.5'
+  s.version          = '0.3.0'
   s.summary          = 'UIKitExtensions adds usefull features to UIKit classes.'
 
 # This description is used to generate tags and improve search results.
@@ -28,9 +28,9 @@ UIKitExtensions adds usefull features to UIKit classes as fadeIn to UIView anima
   s.source           = { :git => 'https://github.com/leloupnicolas/UIKitExtensions.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/leloupnicolas'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.0'
 
-  s.source_files = 'UIKitExtensions'
+  s.source_files = 'Sources/UIKitExtensions'
 
-  s.dependency 'SnapKit', '~> 3.1.2'
+  s.dependency 'SnapKit', '~> 5.0.0'
 end

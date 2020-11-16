@@ -30,15 +30,15 @@ public extension UIColor {
    
    - Returns: UIColor
    */
-  public convenience init?(hexString: String) {
+    convenience init?(hexString: String) {
     let r, g, b, a: CGFloat
     
     if hexString.hasPrefix("#") {
       let start = hexString.index(hexString.startIndex, offsetBy: 1)
-      let hexColor = hexString.substring(from: start)
+      let hexColor = hexString[start...]
       
-      if hexColor.characters.count == 8 {
-        let scanner = Scanner(string: hexColor)
+      if hexColor.count == 8 {
+        let scanner = Scanner(string: String(hexColor))
         var hexNumber: UInt64 = 0
         
         if scanner.scanHexInt64(&hexNumber) {

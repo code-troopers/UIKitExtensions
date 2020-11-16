@@ -18,7 +18,7 @@ public extension UIFont {
    
    - Return: UIFont
    */
-  public static func fontNamed(_ customFontName: String, ofSize fontSize: CGFloat) -> UIFont {
+  static func fontNamed(_ customFontName: String, ofSize fontSize: CGFloat) -> UIFont {
     return UIFont(name: customFontName, size: fontSize)!
   }
 }
